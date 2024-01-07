@@ -5,8 +5,19 @@ include "repository.thrift"
 include "idl.thrift"
 include "template.thrift"
 include "token.thrift"
+include "task.thrift"
+
+struct PingReq {
+    1: string msg
+}
+
+struct PingResp {
+    1: string msg
+}
 
 service AgentService {
+    PingResp Ping(1: PingReq req)
+
     repository.AddRepositoryRes AddRepository(1: repository.AddRepositoryReq req)
     repository.DeleteRepositoriesRes DeleteRepositories(1: repository.DeleteRepositoriesReq req)
     repository.UpdateRepositoryRes UpdateRepository(1: repository.UpdateRepositoryReq req)
@@ -28,6 +39,7 @@ service AgentService {
     template.GetTemplateItemsRes GetTemplateItems(1: template.GetTemplateItemsReq req)
 
     agent.UpdateTasksRes UpdateTasks(1: agent.UpdateTasksReq req)
+    task.UpdateTasksResp UpdateTaskTypes(1: task.UpdateTasksRequest req)
 
     token.AddTokenRes AddToken(1: token.AddTokenReq req)
     token.DeleteTokenRes DeleteToken(1: token.DeleteTokenReq req)
